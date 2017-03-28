@@ -1,0 +1,32 @@
+{
+  "name": "arifrankel",
+  "version": "1.0.0",
+  "description": "Mongo CRUD application",
+  "main": "index.js",
+  "scripts": {
+    "//": [
+      "use nodemon to automate testing on file changes",
+      "use nodemon instead of mocha --watch because it",
+      "plays better with Mongoose",
+      "-R clears terminal first",
+      "min reduces output to just number of test passing w/out desc."
+    ],
+    "test": "nodemon --exec 'mocha -R min'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AriLFrankel/MongoTutorials.git"
+  },
+  "author": "arifrankel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AriLFrankel/MongoTutorials/issues"
+  },
+  "homepage": "https://github.com/AriLFrankel/MongoTutorials#readme",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "mongoose": "^4.9.2",
+    "nodemon": "^1.11.0"
+  }
+}
