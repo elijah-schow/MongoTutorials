@@ -1,5 +1,5 @@
-const chai = require('chai')
-const expect = chai.expect
+//  equivelant to expect = require('chai').expect
+const { expect }  = require('chai')
 const User = require('../user.js')
 
 describe('CRUD tests', () => {
