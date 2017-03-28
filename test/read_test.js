@@ -23,7 +23,7 @@ describe('reading users from the database', () => {
     })
   })
 
-  it('finds a particular user by id', (done) => {
+  it('finds a particular user by id using findOne', (done) => {
     User.findOne({_id: Ari._id})
       .then((oneAri)=>{
         expect(oneAri.name).to.equal('Ari')

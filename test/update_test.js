@@ -5,7 +5,7 @@ let Ari
 
 describe('updating users', () => {
   beforeEach((done) => {
-    Ari = new User({ name: 'Ari', postCount: 1 })
+    Ari = new User({ name: 'Ari', followers: 1, posts:[] })
     Ari.save().then(() => done())
   })
 
@@ -42,11 +42,11 @@ describe('updating users', () => {
     checkUpdated(User.findByIdAndUpdate(Ari._id, {name: 'Joe'}), done)
   })
 
-  it('decrements a user postCount with update operator $inc', (done) => {
-    User.findOneAndUpdate({name: 'Ari'}, {$inc: {postCount: -1}} )
+  it('decrements a user\'s followers with update operator $inc', (done) => {
+    User.findOneAndUpdate({name: 'Ari'}, {$inc: {followers: -1}} )
       .then(() => User.findOne({name: 'Ari'}))
       .then((oneAri) => {
-        expect(oneAri.postCount).to.equal(0)
+        expect(oneAri.followers).to.equal(0)
         done()
       })
   })

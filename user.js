@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const postSchema = require('./post.js')
 
 const UserSchema = new Schema({
   name: {
@@ -18,7 +19,18 @@ const UserSchema = new Schema({
     /*required type validator*/
     required: [true, 'Name is required.']
   },
-  postCount: Number
+  followers: Number,
+  posts: [postSchema]
+})
+
+// virtual fields must be added post facto to the schema with .virtual()
+// virtual fields can make use of JS getters, which allow one to set a function as a property
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get
+// This function will take a this context of the object on which its a property
+// Because of the dependence on the this context, we use a function() not a ()=>, which would 
+// preserve the this from the context of the file rather than take it from the call to .get
+UserSchema.virtual('postCount').get(function(){
+  return this.posts.length
 })
 
 // these belong to the collection called user. Create it if it doesn't exist
