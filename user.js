@@ -37,6 +37,17 @@ UserSchema.virtual('postCount').get(function(){
   return this.posts.length
 })
 
+// add middleware to clean up blog posts associated with a given user before deleting that user
+UserSchema.pre('remove', function(next) {
+  // access the BlogPost model via mongoose rather than node so as to avoid 
+  // cyclical requires
+  const BlogPost = mongoose.model('blogPost')
+  // remove all blogPosts, the ids of which are in this.blogPosts
+  // $in query selector
+  // next is a callback, like Mocha's done, to terminate this async action
+  BlogPost.remove({_id: {$in: this.blogPosts } })
+    .then(() => next())
+})
 // these belong to the collection called user. Create it if it doesn't exist
 // userSchema is the class that a User object should have
 // User is a class/model for Users

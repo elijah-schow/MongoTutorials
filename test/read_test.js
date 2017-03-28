@@ -36,7 +36,11 @@ describe('reading users from the database', () => {
   })
 
   it('uses skip and limit to select results', (done) => {
+    /* sort takes an object argument with a field to sort by and 1 asc -1 desc
+    skip says skip the first two results
+    limit says take only two results */
     User.find({})
+      .sort({name: 1})
       .skip(2)
       .limit(2)
       .then((users)=>{
