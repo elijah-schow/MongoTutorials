@@ -20,7 +20,11 @@ const UserSchema = new Schema({
     required: [true, 'Name is required.']
   },
   followers: Number,
-  posts: [postSchema]
+  posts: [postSchema],
+  blogPosts: [{
+    type: Schema.Types.ObjectId,
+    ref: 'blogPost'
+  }]
 })
 
 // virtual fields must be added post facto to the schema with .virtual()

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 // replace Mongo's deprecated, built in Promise library with
 // native JS Promises
 mongoose.Promise = global.Promise
@@ -19,12 +18,20 @@ before((done)=>{
 // done is a callback argument that can be used to pause
 // the test script until an async action is complete
 beforeEach((done) => {
-  // drop takes a callback
-  mongoose.connection.collections.users.drop(()=>{
-    /* invoke done to resume test script running
-     not invoking done, the script will not continue running
-     It will time out and fail the test 
-     because of the default 2 sec time limit */
-    done()
+  // mongoose normalizes collection names to lowercase
+  const {users, comments, blogposts} = mongoose.connection.collections
+
+  users.drop(() => {
+    blogposts.drop(() => {
+      comments.drop(() => done())
+    })
   })
+/*
+invoke done to resume test script running
+not invoking done, the script will not continue running
+It will time out and fail the test 
+because of the default 2 sec time limit 
+*/
+  // .then(done)
+ 
 })
