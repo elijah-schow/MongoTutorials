@@ -6,7 +6,11 @@ let Ari
 describe('reading users from the database', () => {
   beforeEach((done)=>{
     Ari = new User({name: 'Ari'})
-    Ari.save().then(() => { done() })
+    Joe = new User({name: 'Joe'})
+    Jim = new User({name: 'Jim'})
+    John = new User({name: 'John'})
+    Promise.all([Ari.save(), Joe.save(), Jim.save(), John.save()])
+      .then(() => { done() })
   })
 
   it('finds all users named Ari', (done) => {
@@ -27,6 +31,18 @@ describe('reading users from the database', () => {
     User.findOne({_id: Ari._id})
       .then((oneAri)=>{
         expect(oneAri.name).to.equal('Ari')
+        done()
+      })
+  })
+
+  it('uses skip and limit to select results', (done) => {
+    User.find({})
+      .skip(2)
+      .limit(2)
+      .then((users)=>{
+        expect(users.length === 2)
+        expect(users[0].name === 'Jim')
+        expect(users[1].name === 'John')
         done()
       })
   })
