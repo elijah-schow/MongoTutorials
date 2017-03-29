@@ -6,6 +6,7 @@ let Ari
 describe('reading users from the database', () => {
   beforeEach((done)=>{
     Ari = new User({name: 'Ari'})
+    console.log(Ari._id)
     Joe = new User({name: 'Joe'})
     Jim = new User({name: 'Jim'})
     John = new User({name: 'John'})

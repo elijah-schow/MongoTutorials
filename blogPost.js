@@ -1,7 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-
 /*
 comments will be an array
 pass in to this array a configuration object

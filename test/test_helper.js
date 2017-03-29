@@ -11,7 +11,7 @@ before((done)=>{
    on an 'error event'*/
   mongoose.connect('mongodb://localhost/users_test')
   mongoose.connection
-    .once('open', () => { done() })
+    .once('open', () => done() )
     .on('error', (e) => console.warn(e))
 })
 
@@ -32,6 +32,5 @@ not invoking done, the script will not continue running
 It will time out and fail the test 
 because of the default 2 sec time limit 
 */
-  // .then(done)
  
 })
